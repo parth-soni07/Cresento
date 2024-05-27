@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "./ERC720.sol";
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+// import "./ERC720.sol";
 
-
-contract CresentoCrossChainWallet {
+contract Cresento {
     mapping (string => mapping (string => bool) ) txnPairs;
     mapping (string => uint256) balances;
 
