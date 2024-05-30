@@ -2,14 +2,18 @@
   "dependencies": {
     "@chainlink/contracts": "^1.1.0",
     "@chainlink/contracts-ccip": "^1.4.0",
+    "@nomicfoundation/hardhat-verify": "^2.0.7",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@openzeppelin/cli": "^2.8.2",
-    "hardhat": "^2.22.3"
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.3",
+    "web3": "^4.9.0"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-ethers": "^3.0.6",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@openzeppelin/contracts": "^4.9.6",
     "@openzeppelin/hardhat-upgrades": "^3.1.0",
-    "ether": "5.7.2"
+    "ether": "0.0.9"
   }
 }

@@ -1,28 +1,33 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-// import "./ERC720.sol";
 
 contract Cresento {
-    mapping (string => mapping (string => bool) ) txnPairs;
-    mapping (string => uint256) balances;
+    address payable public owner;
+    mapping(address => uint256) public balances;
 
-    event Transfer(string indexed username, string indexed receiver, uint64 amount);
+    event Transfer(address indexed from, address indexed to, uint256 amount);
 
     constructor() {
-        
-    }
-    function addTxnPairs(string memory user1, string memory user2) public {
-        txnPairs[user1][user2] = true;
-        txnPairs[user2][user1] = true;
+        owner = payable(msg.sender);
     }
 
-    function transfer(string memory un, string memory rec, uint64 amt, string memory authorizedUser) public {
-        require(txnPairs[un][authorizedUser], "Unauthorized Transfer");
-        require(balances[un] >= amt, "Insuffecient Balance");
+    receive() external payable {}
 
-        balances[un] -= amt;
-        balances[rec] += amt;
-        
+    function sendEther(address payable recipient, uint256 amount) public payable {
+        require(msg.sender == owner, "Only the owner can send Ether");
+        require(address(this).balance >= amount, "Insufficient contract balance");
+
+        balances[recipient] += amount;
+        emit Transfer(address(this), recipient, amount);
+        recipient.transfer(amount);
     }
 
+    function withdrawEther(uint256 amount) public {
+        require(msg.sender == owner, "Only the owner can withdraw Ether");
+        require(balances[msg.sender] >= amount, "Insufficient balance");
+
+        balances[msg.sender] -= amount;
+        emit Transfer(msg.sender, address(this), amount);
+        owner.transfer(amount);
+    }
 }
