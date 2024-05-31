@@ -36,7 +36,7 @@ const sendSignedTx = async (signedTx) => {
   );};
 
 const executeTransaction = async () => {
-  const amountTo = "0.01";
+  const amountTo = "0.000001";
   const nonce = await web3.eth.getTransactionCount(accountFrom.address);
   const rawTx = {
     to: accountTo.address,
